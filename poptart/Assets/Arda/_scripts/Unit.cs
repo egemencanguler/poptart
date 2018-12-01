@@ -4,9 +4,10 @@ using UnityEngine;
 
 public abstract class Unit : MonoBehaviour {
 
+	[SerializeField]
 	protected Direction direction;
 
-	protected GridTile tile;
+	public GridTile tile;
 
 	abstract public void Turn ( );
 }

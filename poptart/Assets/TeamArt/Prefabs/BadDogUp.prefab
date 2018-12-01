@@ -20,9 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4255025029240822}
   - component: {fileID: 212244009598386360}
-  - component: {fileID: 114464105619382236}
+  - component: {fileID: 114898085204356960}
   m_Layer: 0
-  m_Name: Dog
+  m_Name: BadDogUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,7 +41,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114464105619382236
+--- !u!114 &114898085204356960
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -49,10 +49,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1157553970616590}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbaa4b54f29d97f4da095522e8fe87b9, type: 3}
+  m_Script: {fileID: 11500000, guid: bc25068016f40f14dba95d06aaade0f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabList: {fileID: 0}
+  direction: 1
+  tile: {fileID: 0}
+  interval: 3
 --- !u!212 &212244009598386360
 SpriteRenderer:
   m_ObjectHideFlags: 1

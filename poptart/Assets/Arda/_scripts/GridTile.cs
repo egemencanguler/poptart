@@ -18,16 +18,14 @@ public class GridTile : MonoBehaviour {
         }
     }
 
-    private bool empty;
-
     public bool Empty {
         get {
-            return empty;
+            return unit == null;
         }
     }
 
     public bool isMovable ( ) {
-        return !Empty;
+        return Empty;
     }
 
     public void Turn ( ) {
@@ -47,5 +45,10 @@ public class GridTile : MonoBehaviour {
         }
 
         return new Vector2 (-1, -1);
+    }
+
+    public void SetPosition (Vector2 position) {
+        this.position = position;
+        this.transform.position = Board.Instance.boardToWorld (position);
     }
 }

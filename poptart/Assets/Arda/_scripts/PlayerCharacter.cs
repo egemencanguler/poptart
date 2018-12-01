@@ -8,57 +8,76 @@ public enum Action {
 	wait
 }
 
-public enum DogType {
-	basic,
-	strong
-}
-
 public class PlayerCharacter : Unit {
-	private Action action;
-	private DogType dogToPlace;
+
+	[SerializeField]
+	private PrefabList prefabList;
+
+	private int id;
 
 	void Start ( ) {
-		InputHandler.onMove += Handle_Move;
-		InputHandler.onPlace += Handle_Place;
+		//Listen for action event
 	}
 
 	public override void Turn ( ) {
-		switch (action) {
-		case Action.move:
+		if (direction != Direction.none)
 			Move ( );
-			break;
-		case Action.place:
-			Place ( );
-			break;
-		}
+
 	}
 
 	private void Move ( ) {
 		GridTile nextTile = Board.Instance.GetNeighbour (tile, direction);
 
-		if (nextTile == null || !nextTile.isMovable ( ))
+		if (nextTile == null)
 			return;
+
+		if (!nextTile.Empty) {
+			Unit unit = nextTile.Unit;
+			if (unit is BadDog) {
+				Die ( );
+			}
+
+			return;
+		}
 
 		tile.Unit = null;
 		tile = nextTile;
 		tile.Unit = this;
+
+		transform.position = tile.transform.position;
 	}
 
-	private void Place ( ) {
-		GridTile nextTile = Board.Instance.GetNeighbour (tile, direction);
+	public void Die ( ) {
+		tile.Unit = null;
 
-		if (nextTile == null || !nextTile.isMovable ( ))
-			return;
+		//unsubscribe to events
 
+		Destroy (gameObject);
 	}
 
-	private void Handle_Move (Direction direction) {
-		this.action = Action.move;
-		this.direction = direction;
-	}
+	/*
+		private void Place ( ) {
+			GridTile nextTile = Board.Instance.GetNeighbour (tile, direction);
 
-	private void Handle_Place (DogType dogToPlace) {
-		this.action = Action.place;
-		this.dogToPlace = dogToPlace;
+			if (nextTile == null || !nextTile.isMovable ( ))
+				return;
+
+			GameObject dog = prefabList.GetPrefab ((int) dogToPlace);
+		}
+	*/
+	private void Handle_Action (int id, Direction direction) {
+		if (this.id == id) {
+			this.direction = direction;
+		}
 	}
+	/*
+		private void Handle_Move (Direction direction) {
+			this.action = Action.move;
+			this.direction = direction;
+		}
+
+		private void Handle_Place (DogType dogToPlace) {
+				this.action = Action.place;
+				this.dogToPlace = dogToPlace;
+		} */
 }

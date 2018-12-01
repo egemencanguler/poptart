@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Dalak;
 
-public class CommandButton : MonoBehaviour 
-{
+public class CommandButton : MonoBehaviour {
 
 }

@@ -17,8 +17,9 @@ public class BadDog : Unit {
 	}
 
 	private void SwitchDirection ( ) {
-		currentProcess = (currentProcess + 1) % interval;
-		if (currentProcess == 0) {
+		if (currentProcess == interval) {
+			currentProcess = 0;
+
 			switch (direction) {
 			case Direction.up:
 				direction = Direction.down;
@@ -39,12 +40,25 @@ public class BadDog : Unit {
 	private void Move ( ) {
 		GridTile nextTile = Board.Instance.GetNeighbour (tile, direction);
 
-		if (nextTile == null || !nextTile.isMovable ( ))
+		if (nextTile == null)
 			return;
+
+		if (!nextTile.Empty) {
+			Unit unit = nextTile.Unit;
+			if (unit is PlayerCharacter) {
+				((PlayerCharacter) unit).Die ( );
+			}
+
+			return;
+		}
+
+		++currentProcess;
 
 		tile.Unit = null;
 		tile = nextTile;
 		tile.Unit = this;
+
+		transform.position = tile.transform.position;
 	}
 
 	private void Act ( ) {
