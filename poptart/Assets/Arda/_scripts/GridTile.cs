@@ -27,7 +27,7 @@ public class GridTile : MonoBehaviour {
     }
 
     public bool isMovable ( ) {
-        return true;
+        return !Empty;
     }
 
     public void Turn ( ) {

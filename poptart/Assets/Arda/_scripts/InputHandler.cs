@@ -31,6 +31,5 @@ public class InputHandler : MonoBehaviour {
 			onPlace (DogType.strong);
 			Board.Instance.Turn ( );
 		}
-
 	}
 }

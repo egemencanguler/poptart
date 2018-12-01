@@ -45,7 +45,11 @@ public class PlayerCharacter : Unit {
 	}
 
 	private void Place ( ) {
-		//TOOD check if next tile in current direction is empty
+		GridTile nextTile = Board.Instance.GetNeighbour (tile, direction);
+
+		if (nextTile == null || !nextTile.isMovable ( ))
+			return;
+
 	}
 
 	private void Handle_Move (Direction direction) {
