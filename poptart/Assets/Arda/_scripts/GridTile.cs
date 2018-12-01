@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GridTile : MonoBehaviour {
 
-    private Vector2 position;
+    public Vector2 position;
 
     private Unit unit;
 

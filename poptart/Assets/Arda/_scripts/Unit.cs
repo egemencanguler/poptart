@@ -10,4 +10,6 @@ public abstract class Unit : MonoBehaviour {
 	public GridTile tile;
 
 	abstract public void Turn ( );
+
+	abstract public void Init (string[ ] args);
 }

@@ -35,8 +35,6 @@ public class Board : MonoBehaviour {
 
 		instance = this;
 		grid = new Dictionary<Vector2, GridTile> ( );
-
-		//TODO Generate map
 	}
 
 	public void Turn ( ) {

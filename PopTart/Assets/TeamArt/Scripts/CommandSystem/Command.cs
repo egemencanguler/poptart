@@ -3,33 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Command
-{
+public class Command {
     public const int NumberOfDirections = 5;
-    public enum Direction
-    {
-        None = 0, Left = 1, Right = 2, Up = 3, Down = 4
+    public enum Direction {
+        None = 0, Up = 1, Right = 2, Down = 3, Left = 4
     }
 
+    Direction[ ] directions;
 
-    Direction[] directions;
-
-    public Command(Direction[] directions)
-    {
+    public Command (Direction[ ] directions) {
         this.directions = directions;
     }
 
-    public Direction GetDirection(int playerIdx)
-    {
+    public Direction GetDirection (int playerIdx) {
         return directions[playerIdx];
     }
 
-
-    public override string ToString()
-    {
+    public override string ToString ( ) {
         string s = "";
-        foreach (var direction in directions)
-        {
+        foreach (var direction in directions) {
             s += direction + ",";
         }
 

@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212244009598386360}
   - component: {fileID: 114898085204356960}
   m_Layer: 0
-  m_Name: BadDogUp
+  m_Name: BadDog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc25068016f40f14dba95d06aaade0f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: 1
+  direction: 0
   tile: {fileID: 0}
   interval: 3
 --- !u!212 &212244009598386360

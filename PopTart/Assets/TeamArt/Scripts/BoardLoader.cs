@@ -18,23 +18,35 @@ public class BoardLoader : MonoBehaviour {
             string[ ] tokens = lines[l].Split (' ');
             for (int i = 0; i < tokens.Length; i++) {
                 string t = tokens[i];
-                int id = int.Parse (tokens[i]);
-                Generate (int.Parse (tokens[i]), new Vector2 (i, lines.Length - l - 1));
+
+                string[ ] args = tokens[i].Split (',');
+
+                int id = int.Parse (args[0]);
+
+                Unit unit = Generate (id, new Vector2 (i, lines.Length - l - 1));
+
+                if (unit != null)
+                    unit.Init (args);
             }
         }
     }
 
-    void Generate (int id, Vector2 pos) {
+    Unit Generate (int id, Vector2 pos) {
         GameObject newObject = null;
 
         if (id != 0) {
+            Debug.Log(id);
             newObject = Instantiate (prefabList.GetPrefab (id));
             newObject.transform.position = Board.Instance.boardToWorld (pos);
         }
 
+        Unit unit = null;
+
         if (newObject != null)
-            Board.Instance.CreateTile (pos, newObject.GetComponent<Unit> ( ));
-        else
-            Board.Instance.CreateTile (pos);
+            unit = newObject.GetComponent<Unit> ( );
+
+        Board.Instance.CreateTile (pos, unit);
+
+        return unit;
     }
 }

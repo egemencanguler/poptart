@@ -10,6 +10,8 @@ public enum Action {
 
 public class PlayerCharacter : Unit {
 
+	static private int userCount = 0;
+
 	[SerializeField]
 	private PrefabList prefabList;
 
@@ -17,12 +19,14 @@ public class PlayerCharacter : Unit {
 
 	void Start ( ) {
 		//Listen for action event
+		id = userCount++;
+
+		CommandPanel.SendCommand += Handle_Command;
 	}
 
 	public override void Turn ( ) {
 		if (direction != Direction.none)
 			Move ( );
-
 	}
 
 	private void Move ( ) {
@@ -65,19 +69,19 @@ public class PlayerCharacter : Unit {
 			GameObject dog = prefabList.GetPrefab ((int) dogToPlace);
 		}
 	*/
-	private void Handle_Action (int id, Direction direction) {
-		if (this.id == id) {
-			this.direction = direction;
-		}
+	private void Handle_Command (Command command) {
+		direction = (Direction) command.GetDirection (id);
 	}
-	/*
-		private void Handle_Move (Direction direction) {
-			this.action = Action.move;
-			this.direction = direction;
-		}
 
-		private void Handle_Place (DogType dogToPlace) {
-				this.action = Action.place;
-				this.dogToPlace = dogToPlace;
-		} */
+	public override void Init (string[ ] args) { }
+	/*
+	private void Handle_Move (Direction direction) {
+	    this.action = Action.move;
+	    this.direction = direction;
+	}
+
+	private void Handle_Place (DogType dogToPlace) {
+	        this.action = Action.place;
+	        this.dogToPlace = dogToPlace;
+	} */
 }

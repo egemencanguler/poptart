@@ -11,8 +11,6 @@ public class BadDog : Unit {
 	public override void Turn ( ) {
 		Move ( );
 
-		Act ( );
-
 		SwitchDirection ( );
 	}
 
@@ -47,9 +45,7 @@ public class BadDog : Unit {
 			Unit unit = nextTile.Unit;
 			if (unit is PlayerCharacter) {
 				((PlayerCharacter) unit).Die ( );
-			}
-
-			return;
+			} else return;
 		}
 
 		++currentProcess;
@@ -61,7 +57,9 @@ public class BadDog : Unit {
 		transform.position = tile.transform.position;
 	}
 
-	private void Act ( ) {
-
+	public override void Init (string[ ] args) {
+		direction = (Direction) int.Parse (args[1]);
+		interval = int.Parse (args[2]);
+		currentProcess = int.Parse (args[3]);
 	}
 }
