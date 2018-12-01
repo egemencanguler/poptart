@@ -40,4 +40,16 @@ public class Board : MonoBehaviour {
 			}
 		}
 	}
+
+	public GridTile GetTile (Vector2 position) {
+		if (grid.ContainsKey (position))
+			return grid[position];
+		return null;
+	}
+
+	public GridTile GetNeighbour (GridTile tile, Direction direction) {
+		Vector2 position = tile.GetNeighbourPosition (direction);
+
+		return GetTile (position);
+	}
 }

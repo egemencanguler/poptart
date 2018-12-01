@@ -34,17 +34,14 @@ public class PlayerCharacter : Unit {
 	}
 
 	private void Move ( ) {
-		switch (direction) {
-		case Direction.up:
-			//TOOD check if next tile in current direction is empty
-			break;
-		case Direction.right:
-			break;
-		case Direction.down:
-			break;
-		case Direction.left:
-			break;
-		}
+		GridTile nextTile = Board.Instance.GetNeighbour (tile, direction);
+
+		if (nextTile == null || !nextTile.isMovable ( ))
+			return;
+
+		tile.Unit = null;
+		tile = nextTile;
+		tile.Unit = this;
 	}
 
 	private void Place ( ) {
@@ -54,12 +51,10 @@ public class PlayerCharacter : Unit {
 	private void Handle_Move (Direction direction) {
 		this.action = Action.move;
 		this.direction = direction;
-		Board.Instance.Turn ( );
 	}
 
 	private void Handle_Place (DogType dogToPlace) {
 		this.action = Action.place;
 		this.dogToPlace = dogToPlace;
-		Board.Instance.Turn ( );
 	}
 }

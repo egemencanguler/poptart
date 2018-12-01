@@ -8,14 +8,12 @@ public class BadDog : Unit {
 	private int interval;
 	private int currentProcess;
 
-	private Direction direction;
-
 	public override void Turn ( ) {
 		Move ( );
 
-		SwitchDirection ( );
-
 		Act ( );
+
+		SwitchDirection ( );
 	}
 
 	private void SwitchDirection ( ) {
@@ -39,17 +37,14 @@ public class BadDog : Unit {
 	}
 
 	private void Move ( ) {
-		switch (direction) {
-		case Direction.up:
-			//TOOD check if next tile in current direction is empty
-			break;
-		case Direction.right:
-			break;
-		case Direction.down:
-			break;
-		case Direction.left:
-			break;
-		}
+		GridTile nextTile = Board.Instance.GetNeighbour (tile, direction);
+
+		if (nextTile == null || !nextTile.isMovable ( ))
+			return;
+
+		tile.Unit = null;
+		tile = nextTile;
+		tile.Unit = this;
 	}
 
 	private void Act ( ) {
