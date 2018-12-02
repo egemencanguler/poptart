@@ -51,6 +51,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1336269af7b984ccf9d6db1015edafa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  groundPrefabs:
+  - {fileID: 1093696337697734, guid: 57fc8c50b705447ae9efbb5b4531b1a9, type: 2}
+  - {fileID: 1647679195309244, guid: c13c201ac883f4d60b7a57eb7cbfa910, type: 2}
   prefabs:
   - {fileID: 1738753959915970, guid: b672fdea0b365468282df143df477d59, type: 2}
   - {fileID: 1559592328278676, guid: 8319cd2ebc8e443daa321014d5512e6c, type: 2}
