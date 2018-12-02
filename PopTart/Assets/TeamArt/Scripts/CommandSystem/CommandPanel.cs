@@ -120,7 +120,6 @@ public class CommandPanel : MonoBehaviour {
 
             commands.Enqueue (new Command (i, dirs));
 
-            Debug.Log ("Holo");
         }
 
         while (commands.Count != 0) {
