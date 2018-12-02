@@ -19,6 +19,8 @@ public class Board : MonoBehaviour {
 
 	static private Board instance;
 
+	public Sprite[ ] dogSprites;
+
 	static public Board Instance {
 		get {
 			return instance;

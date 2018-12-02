@@ -25,7 +25,7 @@ public class PlayerCharacter : Unit {
 		//Listen for action event
 		id = userCount++;
 
-		renderer.color = dogColor[id];
+		renderer.sprite = Board.Instance.dogSprites[id];
 
 		CommandPanel.SendCommand += Handle_Command;
 	}

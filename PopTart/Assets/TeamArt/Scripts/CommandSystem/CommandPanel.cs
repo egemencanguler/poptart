@@ -9,6 +9,8 @@ public class CommandPanel : MonoBehaviour {
     public RectTransform buttonContainer;
     public GameObject commandButtonPrefab;
     public GameObject commandNumberPrefab;
+    public GameObject dogIconPrefab;
+    
     public GridLayoutGroup buttonGrid;
     public Text leftCommandText, rightCommandText, upCommandText, downCommandText;
     public Button playButton;
@@ -17,6 +19,9 @@ public class CommandPanel : MonoBehaviour {
     CommandNumbers commandNumbers;
     int numberOfPlayers;
     int numberOfCommands;
+
+    public AudioClip pause, play;
+    public AudioSource audioSource;
 
     void Awake ( ) {
         playButton.onClick.AddListener (OnPlayButtonClicked);
@@ -33,6 +38,15 @@ public class CommandPanel : MonoBehaviour {
         commandNumbers = new CommandNumbers (nLeft, nRight, nUp, nDown);
         commandButtons.Clear ( );
         buttonGrid.constraintCount = nPlayer + 1;
+        
+        Instantiate(dogIconPrefab).transform.SetParent(buttonContainer,false);
+
+        for (int i = 0; i < numberOfPlayers; i++)
+        {
+            GameObject dogIcon = Instantiate(dogIconPrefab);
+            dogIcon.transform.SetParent(buttonContainer,false);
+            dogIcon.GetComponent<Image>().sprite = Board.Instance.dogSprites[i];
+        }
 
         for (int i = 0; i < nCommand; i++) {
             GameObject commandNumberObject = Instantiate (commandNumberPrefab);
@@ -108,6 +122,9 @@ public class CommandPanel : MonoBehaviour {
         playButton.interactable = false;
         playButton.image.color = Color.red;
 
+        audioSource.clip = play;
+        audioSource.Play ( );
+
         const float Interval = 0.5f;
         var wait = new WaitForSeconds (Interval);
         Queue<Command> commands = new Queue<Command> ( );
@@ -120,23 +137,24 @@ public class CommandPanel : MonoBehaviour {
 
             commands.Enqueue (new Command (i, dirs));
 
-            Debug.Log ("Holo");
         }
 
         while (commands.Count != 0) {
             Command command = commands.Dequeue ( );
             Debug.Log ("Command: " + command.ToString ( ));
-            Interpolator.BeforeCommand();
-            if (SendCommand != null) 
-            {
+            Interpolator.BeforeCommand ( );
+            if (SendCommand != null) {
                 SendCommand (command);
                 Board.Instance.Turn ( );
             }
-            Interpolator.AfterCommand();
-            yield return Interpolator.Interpolate(0.5f);
+            Interpolator.AfterCommand ( );
+            yield return Interpolator.Interpolate (0.5f);
         }
 
         playButton.interactable = true;
         playButton.image.color = Color.green;
+
+        audioSource.clip = pause;
+        audioSource.Play ( );
     }
 }
