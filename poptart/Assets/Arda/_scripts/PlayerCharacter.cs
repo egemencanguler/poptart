@@ -58,6 +58,8 @@ public class PlayerCharacter : Unit {
 				if (unit is BadDog || unit is PlayerCharacter) {
 					unit.Turn ( );
 					Move ( );
+				} else if (unit is Finish) {
+					Die ( );
 				}
 
 				return;
