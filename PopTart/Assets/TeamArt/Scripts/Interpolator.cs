@@ -59,8 +59,12 @@ public static class Interpolator
         {
             if (unit != null)
             {
-                Vector2 pAfter = posAfter[unit.gameObject.GetInstanceID()];
-                unit.transform.position = pAfter;
+                int id = unit.gameObject.GetInstanceID();
+                if (posAfter.ContainsKey(id))
+                {
+                    Vector2 pAfter = posAfter[unit.gameObject.GetInstanceID()];
+                    unit.transform.position = pAfter;
+                }
             }
         }
         
