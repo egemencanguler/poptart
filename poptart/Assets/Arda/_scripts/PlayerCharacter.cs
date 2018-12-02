@@ -25,11 +25,19 @@ public class PlayerCharacter : Unit {
 	}
 
 	public override void Turn ( ) {
+		if (HasMoved)
+			return;
+
+		HasMoved = true;
+
 		if (direction != Direction.none)
 			Move ( );
+
 	}
 
-	private void Move ( ) {
+	public void Move ( ) {
+		Debug.Log ("id:" + id + "\t" + "dir:" + direction);
+
 		GridTile nextTile = Board.Instance.GetNeighbour (tile, direction);
 
 		if (nextTile == null)
@@ -37,14 +45,24 @@ public class PlayerCharacter : Unit {
 
 		if (!nextTile.Empty) {
 			Unit unit = nextTile.Unit;
-			if (unit is BadDog) {
-				Die ( );
-			} else if (unit is LaserPart) {
+
+			if (unit is LaserPart) {
 				((LaserPart) unit).Destruct ( );
 				Die ( );
+				return;
+			} else if (unit.HasMoved) {
+				if (unit is BadDog)
+					Die ( );
+				return;
+			} else {
+				if (unit is BadDog || unit is PlayerCharacter) {
+					unit.Turn ( );
+					Move ( );
+				}
+
+				return;
 			}
 
-			return;
 		}
 
 		tile.Unit = null;
@@ -52,6 +70,8 @@ public class PlayerCharacter : Unit {
 		tile.Unit = this;
 
 		transform.position = tile.transform.position;
+
+		direction = Direction.none;
 	}
 
 	public void Die ( ) {

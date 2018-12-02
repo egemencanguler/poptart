@@ -14,4 +14,6 @@ public abstract class Unit : MonoBehaviour {
 	abstract public void Init (string[ ] args);
 
 	public string[ ] args;
+
+	public bool HasMoved;
 }
