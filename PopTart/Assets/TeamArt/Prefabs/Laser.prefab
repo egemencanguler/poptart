@@ -173,6 +173,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: 0
   tile: {fileID: 0}
+  PrefabLaserPart: {fileID: 1157553970616590, guid: 93fd224e97cae144e9a379989d7b9527,
+    type: 2}
   laserLineRenderer: {fileID: 120768553511700192}
   particleSystem: {fileID: 198083924662803060}
   spriteTransform: {fileID: 4640447549810674}

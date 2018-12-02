@@ -12,4 +12,6 @@ public abstract class Unit : MonoBehaviour {
 	abstract public void Turn ( );
 
 	abstract public void Init (string[ ] args);
+
+	public string[ ] args;
 }

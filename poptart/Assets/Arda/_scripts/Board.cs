@@ -82,4 +82,12 @@ public class Board : MonoBehaviour {
 
 		return new Vector2 (x, y);
 	}
+
+	public void Init ( ) {
+		foreach (KeyValuePair<Vector2, GridTile> pair in grid) {
+			if (!pair.Value.Empty) {
+				pair.Value.Unit.Init (pair.Value.Unit.args);
+			}
+		}
+	}
 }

@@ -39,6 +39,9 @@ public class PlayerCharacter : Unit {
 			Unit unit = nextTile.Unit;
 			if (unit is BadDog) {
 				Die ( );
+			} else if (unit is LaserPart) {
+				((LaserPart) unit).Destruct ( );
+				Die ( );
 			}
 
 			return;

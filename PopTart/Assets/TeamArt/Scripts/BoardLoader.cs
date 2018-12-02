@@ -26,16 +26,18 @@ public class BoardLoader : MonoBehaviour {
                 Unit unit = Generate (id, new Vector2 (i, lines.Length - l - 1));
 
                 if (unit != null)
-                    unit.Init (args);
+                    unit.args = args;
             }
         }
+
+        Board.Instance.Init ( );
     }
 
     Unit Generate (int id, Vector2 pos) {
         GameObject newObject = null;
 
         if (id != 0) {
-            Debug.Log(id);
+            Debug.Log (id);
             newObject = Instantiate (prefabList.GetPrefab (id));
             newObject.transform.position = Board.Instance.boardToWorld (pos);
         }
