@@ -10,9 +10,11 @@ public class Command {
     }
 
     Direction[ ] directions;
+    public readonly int commandIdx;
 
-    public Command (Direction[ ] directions) {
+    public Command (int commandIdx, Direction[ ] directions) {
         this.directions = directions;
+        this.commandIdx = commandIdx;
     }
 
     public Direction GetDirection (int playerIdx) {
