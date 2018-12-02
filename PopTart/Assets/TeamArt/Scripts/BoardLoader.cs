@@ -5,17 +5,24 @@ using UnityEngine.UI;
 
 public class BoardLoader : MonoBehaviour {
 
+    public int BoardWidth { private set; get; }
+    public int BoardHeight { private set; get; }
+    
     public TextAsset boardText;
     public PrefabList prefabList;
 
-    void Awake ( ) {
+    void Awake ( ) 
+    {
         GenerateBoard (boardText.text);
     }
 
     void GenerateBoard (string text) {
         string[ ] lines = text.Split ('\n');
-        for (int l = 0; l < lines.Length; l++) {
+        BoardWidth = lines.Length;
+        for (int l = 0; l < lines.Length; l++)
+        {
             string[ ] tokens = lines[l].Split (' ');
+            BoardHeight = tokens.Length;
             for (int i = 0; i < tokens.Length; i++) {
                 string t = tokens[i];
 

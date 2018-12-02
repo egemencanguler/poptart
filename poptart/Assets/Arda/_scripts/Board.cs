@@ -25,7 +25,7 @@ public class Board : MonoBehaviour {
 		}
 	}
 
-	float cellsize = 3.2f;
+	public float cellsize = 3.2f;
 
 	void Awake ( ) {
 		if (instance != null) {
