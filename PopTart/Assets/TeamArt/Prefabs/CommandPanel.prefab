@@ -711,6 +711,8 @@ MonoBehaviour:
     type: 2}
   commandNumberPrefab: {fileID: 1871590724368480, guid: 9d9664b0a2ce2412abab930efc575eb7,
     type: 2}
+  dogIconPrefab: {fileID: 1406647483134264, guid: 04487e980d3bd4c8091e48e739bfb4fb,
+    type: 2}
   buttonGrid: {fileID: 114766947871559970}
   leftCommandText: {fileID: 114112352365488016}
   rightCommandText: {fileID: 114122517786144670}
@@ -1003,8 +1005,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114780348451897742}
   m_HandleRect: {fileID: 0}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 1
+  m_Value: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1443,7 +1445,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00002506722}
+  m_AnchoredPosition: {x: 0, y: -0.000044454064}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &224618052576010576
