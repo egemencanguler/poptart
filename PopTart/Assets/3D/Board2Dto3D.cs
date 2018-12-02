@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,8 @@ public class Board2Dto3D : MonoBehaviour
     Dictionary<int,Unit> objectToUnit = new Dictionary<int, Unit>();
     List<Unit> units = new List<Unit>();
     List<GameObject> objects = new List<GameObject>();
+
+    public GameObject[] groundPrefabs;
     
     
     public GameObject[] prefabs;
@@ -35,6 +38,7 @@ public class Board2Dto3D : MonoBehaviour
         {
             Destroy(container);
         }
+        container = new GameObject("3DContainer");
         
         Board board = Board.Instance;
         foreach (var tile in board.grid.Values)
@@ -43,17 +47,28 @@ public class Board2Dto3D : MonoBehaviour
             if (type != UnitType.Empty)
             {
                 Transform t = Instantiate(GetPrefab(type)).transform;
-                t.position = ConvertPosTo3D(tile.position);
+                t.parent = container.transform;
+                t.position = ConvertPosTo3D(tile.transform.position);
                 
                 unitToObjectMap.Add(tile.Unit.GetInstanceID(),t);
                 objectToUnit.Add(t.gameObject.GetInstanceID(),tile.Unit);
                 units.Add(tile.Unit);
                 objects.Add(t.gameObject);
             }
+
+            Vector3 groundPos = ConvertPosTo3D(tile.transform.position);
+            groundPos += Vector3.down;
+            int xIdx = (int) groundPos.x;
+            int yIdx = (int) groundPos.z;
+            int idx = (xIdx + yIdx) % 2;
+            Transform gt = Instantiate(groundPrefabs[idx]).transform;
+            gt.position = groundPos;
+            gt.parent = container.transform;
+
         }
     }
 
-    Vector3 ConvertPosTo3D(Vector2 pos)
+    public  static Vector3 ConvertPosTo3D(Vector2 pos)
     {
         return Offset + new Vector3(pos.x,0,pos.y) / Board.Instance.cellsize;
     }
@@ -68,6 +83,11 @@ public class Board2Dto3D : MonoBehaviour
             {
                 Transform t = unitToObjectMap[unit.GetInstanceID()];
                 t.transform.position = ConvertPosTo3D(unit.transform.position);
+
+                if (unit is Laser)
+                {
+                    t.GetComponent<Laser3D>().UpdateState((Laser) unit);
+                }
             }
         }
 
@@ -79,6 +99,11 @@ public class Board2Dto3D : MonoBehaviour
                 Destroy(o);
                 objects.RemoveAt(i);
             }
+        }
+
+        if (container != null && objects.Count == 0)
+        {
+            CreateObjects();
         }
         
     }
