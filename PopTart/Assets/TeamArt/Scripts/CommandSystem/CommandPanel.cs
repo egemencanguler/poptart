@@ -115,7 +115,7 @@ public class CommandPanel : MonoBehaviour {
                 dirs[p] = commandButtons[idx + p].direction;
             }
 
-            commands.Enqueue (new Command (dirs));
+            commands.Enqueue (new Command (i,dirs));
             
             Debug.Log("Holo");
         }
