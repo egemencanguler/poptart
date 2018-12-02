@@ -8,6 +8,7 @@ public class CommandPanel : MonoBehaviour {
 
     public RectTransform buttonContainer;
     public GameObject commandButtonPrefab;
+    public GameObject commandNumberPrefab;
     public GridLayoutGroup buttonGrid;
     public Text leftCommandText, rightCommandText, upCommandText, downCommandText;
     public Button playButton;
@@ -28,10 +29,13 @@ public class CommandPanel : MonoBehaviour {
         
         commandNumbers = new CommandNumbers (nLeft, nRight, nUp, nDown);
         commandButtons.Clear ( );
-        buttonGrid.constraintCount = nPlayer;
+        buttonGrid.constraintCount = nPlayer + 1;
 
-        for (int i = 0; i < nCommand; i++) 
+        for (int i = 0; i < nCommand; i++)
         {
+            GameObject commandNumberObject = Instantiate(commandNumberPrefab);
+            commandNumberObject.transform.SetParent(buttonContainer,false);
+            commandNumberObject.GetComponent<CommandNumber>().Setup(i);
             for (int pIndex = 0; pIndex < nPlayer; pIndex++) 
             {
                 GameObject buttonObject = Instantiate (commandButtonPrefab);
