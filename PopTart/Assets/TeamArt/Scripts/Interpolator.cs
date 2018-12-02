@@ -40,9 +40,13 @@ public static class Interpolator
             {
                 if (unit != null)
                 {
-                    Vector2 pBefore = posBefore[unit.gameObject.GetInstanceID()];
-                    Vector2 pAfter = posAfter[unit.gameObject.GetInstanceID()];
-                    unit.transform.position = Vector2.Lerp(pBefore, pAfter, nTime);
+                    int id = unit.gameObject.GetInstanceID();
+                    if (posAfter.ContainsKey(id) && posBefore.ContainsKey(id))
+                    {
+                        Vector2 pBefore = posBefore[id];
+                        Vector2 pAfter = posAfter[id];
+                        unit.transform.position = Vector2.Lerp(pBefore, pAfter, nTime);
+                    }
                     
                 }
             }
@@ -55,8 +59,12 @@ public static class Interpolator
         {
             if (unit != null)
             {
-                Vector2 pAfter = posAfter[unit.gameObject.GetInstanceID()];
-                unit.transform.position = pAfter;
+                int id = unit.gameObject.GetInstanceID();
+                if (posAfter.ContainsKey(id))
+                {
+                    Vector2 pAfter = posAfter[unit.gameObject.GetInstanceID()];
+                    unit.transform.position = pAfter;
+                }
             }
         }
         
