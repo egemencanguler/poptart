@@ -94,4 +94,15 @@ public class Board : MonoBehaviour {
 			}
 		}
 	}
+
+	public void Clear ( ) {
+		foreach (KeyValuePair<Vector2, GridTile> pair in grid) {
+			if (!pair.Value.Empty)
+				Destroy (pair.Value.Unit.gameObject);
+
+			Destroy (pair.Value.gameObject);
+		}
+
+		grid.Clear ( );
+	}
 }

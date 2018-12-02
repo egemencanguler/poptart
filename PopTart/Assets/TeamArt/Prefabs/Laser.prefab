@@ -173,6 +173,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: 0
   tile: {fileID: 0}
+  args: []
+  HasMoved: 0
   PrefabLaserPart: {fileID: 1157553970616590, guid: 93fd224e97cae144e9a379989d7b9527,
     type: 2}
   laserLineRenderer: {fileID: 120768553511700192}
@@ -218,7 +220,7 @@ LineRenderer:
   - {x: 0, y: 3, z: 1}
   m_Parameters:
     serializedVersion: 2
-    widthMultiplier: 0.05
+    widthMultiplier: 0.3
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -479,7 +481,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.25
+      scalar: 0.4
       minScalar: 1
       maxCurve:
         serializedVersion: 2

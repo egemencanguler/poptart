@@ -10,16 +10,22 @@ public enum Action {
 
 public class PlayerCharacter : Unit {
 
-	static private int userCount = 0;
+	static public int userCount = 0;
 
 	[SerializeField]
 	private PrefabList prefabList;
 
 	private int id;
 
+	public Color[ ] dogColor;
+
+	public SpriteRenderer renderer;
+
 	void Start ( ) {
 		//Listen for action event
 		id = userCount++;
+
+		renderer.color = dogColor[id];
 
 		CommandPanel.SendCommand += Handle_Command;
 	}
@@ -58,11 +64,12 @@ public class PlayerCharacter : Unit {
 				if (unit is BadDog || unit is PlayerCharacter) {
 					unit.Turn ( );
 					Move ( );
+				} else if (unit is Finish) {
+					Die ( );
 				}
 
 				return;
 			}
-
 		}
 
 		tile.Unit = null;

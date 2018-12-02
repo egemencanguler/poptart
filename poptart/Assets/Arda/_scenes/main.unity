@@ -330,9 +330,70 @@ Prefab:
       propertyPath: m_Color.b
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 224595414222306822, guid: 01a54c7f506054a56a9e6355369b960c,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.00002506722
+      objectReference: {fileID: 0}
+    - target: {fileID: 224081510436773364, guid: 01a54c7f506054a56a9e6355369b960c,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 224081510436773364, guid: 01a54c7f506054a56a9e6355369b960c,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 224117871376752242, guid: 01a54c7f506054a56a9e6355369b960c,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 224117871376752242, guid: 01a54c7f506054a56a9e6355369b960c,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 224173914169315760, guid: 01a54c7f506054a56a9e6355369b960c,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 224173914169315760, guid: 01a54c7f506054a56a9e6355369b960c,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 224916336218381310, guid: 01a54c7f506054a56a9e6355369b960c,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 224916336218381310, guid: 01a54c7f506054a56a9e6355369b960c,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 114766947871559970, guid: 01a54c7f506054a56a9e6355369b960c,
+        type: 2}
+      propertyPath: m_Padding.m_Top
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 224595414222306822, guid: 01a54c7f506054a56a9e6355369b960c,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 01a54c7f506054a56a9e6355369b960c, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &435222340 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114482178443552144, guid: 01a54c7f506054a56a9e6355369b960c,
+    type: 2}
+  m_PrefabInternal: {fileID: 330467044}
+  m_Script: {fileID: 11500000, guid: cf37e923300ac43c9be37110f496d284, type: 3}
 --- !u!1 &1375235771
 GameObject:
   m_ObjectHideFlags: 0
@@ -344,8 +405,8 @@ GameObject:
   - component: {fileID: 1375235774}
   - component: {fileID: 1375235773}
   - component: {fileID: 1375235772}
-  - component: {fileID: 1375235776}
   - component: {fileID: 1375235777}
+  - component: {fileID: 1375235776}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -424,9 +485,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1375235771}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 68675f15dd910ab4692678b9ac33c5f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loader: {fileID: 1459358275}
+  levels:
+  - {fileID: 4900000, guid: 05e4e434d320c1b43aeb3835766a3b00, type: 3}
+  - {fileID: 4900000, guid: 2c6c02c7961ed8a41a76b21b32aa11b3, type: 3}
+  - {fileID: 4900000, guid: 221af523115eaad4284889d162a202dd, type: 3}
+  - {fileID: 4900000, guid: 4433507446c76fe42b4fd39053b70909, type: 3}
 --- !u!114 &1375235777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -492,8 +559,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 956f21447729b4589b80de65bfba1f75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boardText: {fileID: 4900000, guid: 05e4e434d320c1b43aeb3835766a3b00, type: 3}
+  boardText: {fileID: 4900000, guid: 4433507446c76fe42b4fd39053b70909, type: 3}
   prefabList: {fileID: 11400000, guid: c76c7020447e34f90bb65fe67664aa10, type: 2}
+  panel: {fileID: 435222340}
 --- !u!1 &1900674923
 GameObject:
   m_ObjectHideFlags: 0

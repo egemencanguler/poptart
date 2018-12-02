@@ -7,20 +7,40 @@ public class BoardLoader : MonoBehaviour {
 
     public int BoardWidth { private set; get; }
     public int BoardHeight { private set; get; }
-    
+
     public TextAsset boardText;
     public PrefabList prefabList;
 
-    void Awake ( ) 
-    {
+    public CommandPanel panel;
+
+    void Awake ( ) {
         GenerateBoard (boardText.text);
     }
 
-    void GenerateBoard (string text) {
+    public void GenerateBoard (string text, bool setupPanel = true) {
+        PlayerCharacter.userCount = 0;
+
+        Board.Instance.Clear ( );
+
         string[ ] lines = text.Split ('\n');
         BoardWidth = lines.Length;
-        for (int l = 0; l < lines.Length; l++)
-        {
+
+        if (setupPanel) {
+
+            string[ ] mapConf = lines[0].Split (' ');
+
+            int dogCount = int.Parse (mapConf[0]);
+            int maxTurn = int.Parse (mapConf[1]);
+            int up = int.Parse (mapConf[2]);
+            int right = int.Parse (mapConf[3]);
+            int down = int.Parse (mapConf[4]);
+            int left = int.Parse (mapConf[5]);
+
+            panel.Setup (dogCount, maxTurn, left, right, up, down);
+
+        }
+
+        for (int l = 1; l < lines.Length; l++) {
             string[ ] tokens = lines[l].Split (' ');
             BoardHeight = tokens.Length;
             for (int i = 0; i < tokens.Length; i++) {
@@ -30,7 +50,7 @@ public class BoardLoader : MonoBehaviour {
 
                 int id = int.Parse (args[0]);
 
-                Unit unit = Generate (id, new Vector2 (i, lines.Length - l - 1));
+                Unit unit = Generate (id, new Vector2 (i, lines.Length - l - 2));
 
                 if (unit != null)
                     unit.args = args;

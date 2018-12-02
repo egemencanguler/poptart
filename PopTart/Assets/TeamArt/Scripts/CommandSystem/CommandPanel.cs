@@ -20,24 +20,25 @@ public class CommandPanel : MonoBehaviour {
 
     void Awake ( ) {
         playButton.onClick.AddListener (OnPlayButtonClicked);
-        Setup (3, 10, 0, 4, 2, 0);
     }
 
-    void Setup (int nPlayer, int nCommand, int nLeft, int nRight, int nUp, int nDown) {
+    public void Setup (int nPlayer, int nCommand, int nLeft, int nRight, int nUp, int nDown) {
+        foreach (Transform child in buttonContainer) {
+            Destroy (child.gameObject);
+        }
+
         numberOfPlayers = nPlayer;
         numberOfCommands = nCommand;
-        
+
         commandNumbers = new CommandNumbers (nLeft, nRight, nUp, nDown);
         commandButtons.Clear ( );
         buttonGrid.constraintCount = nPlayer + 1;
 
-        for (int i = 0; i < nCommand; i++)
-        {
-            GameObject commandNumberObject = Instantiate(commandNumberPrefab);
-            commandNumberObject.transform.SetParent(buttonContainer,false);
-            commandNumberObject.GetComponent<CommandNumber>().Setup(i);
-            for (int pIndex = 0; pIndex < nPlayer; pIndex++) 
-            {
+        for (int i = 0; i < nCommand; i++) {
+            GameObject commandNumberObject = Instantiate (commandNumberPrefab);
+            commandNumberObject.transform.SetParent (buttonContainer, false);
+            commandNumberObject.GetComponent<CommandNumber> ( ).Setup (i);
+            for (int pIndex = 0; pIndex < nPlayer; pIndex++) {
                 GameObject buttonObject = Instantiate (commandButtonPrefab);
                 buttonObject.transform.SetParent (buttonContainer, false);
                 buttonObject.GetComponent<CommandButton> ( ).DirectionChanged += (direction) => {
@@ -110,18 +111,16 @@ public class CommandPanel : MonoBehaviour {
         const float Interval = 0.5f;
         var wait = new WaitForSeconds (Interval);
         Queue<Command> commands = new Queue<Command> ( );
-        for (int i = 0; i < numberOfCommands; i++)
-        {
+        for (int i = 0; i < numberOfCommands; i++) {
             int idx = i * numberOfPlayers;
-            Command.Direction[] dirs = new Command.Direction[numberOfPlayers];
-            for (int p = 0; p < dirs.Length; p++)
-            {
+            Command.Direction[ ] dirs = new Command.Direction[numberOfPlayers];
+            for (int p = 0; p < dirs.Length; p++) {
                 dirs[p] = commandButtons[idx + p].direction;
             }
 
-            commands.Enqueue (new Command (i,dirs));
-            
-            Debug.Log("Holo");
+            commands.Enqueue (new Command (i, dirs));
+
+            Debug.Log ("Holo");
         }
 
         while (commands.Count != 0) {
@@ -134,5 +133,7 @@ public class CommandPanel : MonoBehaviour {
             yield return wait;
         }
 
+        playButton.interactable = true;
+        playButton.image.color = Color.green;
     }
 }
