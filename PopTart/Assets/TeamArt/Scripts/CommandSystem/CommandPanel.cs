@@ -9,6 +9,8 @@ public class CommandPanel : MonoBehaviour {
     public RectTransform buttonContainer;
     public GameObject commandButtonPrefab;
     public GameObject commandNumberPrefab;
+    public GameObject dogIconPrefab;
+    
     public GridLayoutGroup buttonGrid;
     public Text leftCommandText, rightCommandText, upCommandText, downCommandText;
     public Button playButton;
@@ -36,6 +38,15 @@ public class CommandPanel : MonoBehaviour {
         commandNumbers = new CommandNumbers (nLeft, nRight, nUp, nDown);
         commandButtons.Clear ( );
         buttonGrid.constraintCount = nPlayer + 1;
+        
+        Instantiate(dogIconPrefab).transform.SetParent(buttonContainer,false);
+
+        for (int i = 0; i < numberOfPlayers; i++)
+        {
+            GameObject dogIcon = Instantiate(dogIconPrefab);
+            dogIcon.transform.SetParent(buttonContainer,false);
+            dogIcon.GetComponent<Image>().sprite = Board.Instance.dogSprites[i];
+        }
 
         for (int i = 0; i < nCommand; i++) {
             GameObject commandNumberObject = Instantiate (commandNumberPrefab);
