@@ -29,7 +29,8 @@ public class GridTile : MonoBehaviour {
     }
 
     public void Turn ( ) {
-        unit.Turn ( );
+        if (unit != null)
+            unit.Turn ( );
     }
 
     public Vector2 GetNeighbourPosition (Direction direction) {

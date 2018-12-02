@@ -9,6 +9,11 @@ public class BadDog : Unit {
 	private int currentProcess;
 
 	public override void Turn ( ) {
+		if (HasMoved)
+			return;
+
+		HasMoved = true;
+
 		Move ( );
 
 		SwitchDirection ( );
@@ -35,7 +40,9 @@ public class BadDog : Unit {
 		}
 	}
 
-	private void Move ( ) {
+	public void Move ( ) {
+		Debug.Log ("id: bad dog" + "\t" + "dir:" + direction);
+
 		GridTile nextTile = Board.Instance.GetNeighbour (tile, direction);
 
 		if (nextTile == null)
@@ -43,9 +50,19 @@ public class BadDog : Unit {
 
 		if (!nextTile.Empty) {
 			Unit unit = nextTile.Unit;
-			if (unit is PlayerCharacter) {
-				((PlayerCharacter) unit).Die ( );
-			} else return;
+			if (unit.HasMoved) {
+				if (unit is PlayerCharacter) {
+					((PlayerCharacter) unit).Die ( );
+				} else if (unit is BadDog) {
+					return;
+				}
+			} else {
+				if (unit is BadDog || unit is PlayerCharacter) {
+					unit.Turn ( );
+					Move ( );
+				}
+				return;
+			}
 		}
 
 		++currentProcess;

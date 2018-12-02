@@ -47,6 +47,10 @@ public class Board : MonoBehaviour {
 		}
 
 		for (int i = 0; i < tiles.Count; ++i) {
+			((GridTile) tiles[i]).Unit.HasMoved = false;
+		}
+
+		for (int i = 0; i < tiles.Count; ++i) {
 			((GridTile) tiles[i]).Turn ( );
 		}
 	}
