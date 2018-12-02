@@ -3,33 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CommandNumber : MonoBehaviour
-{
+public class CommandNumber : MonoBehaviour {
 
     public Text commandNumberText;
     public Image backgroundImage;
     int commandIdx = -1;
-    
-    public void Setup(int commandIdx)
-    {
+
+    void Update ( ) {
+        if (Input.GetKey (KeyCode.R))
+            backgroundImage.color = Color.white;
+    }
+
+    public void Setup (int commandIdx) {
         this.commandIdx = commandIdx;
         commandNumberText.text = (commandIdx + 1) + "";
     }
 
-    void OnEnable()
-    {
+    void OnEnable ( ) {
         CommandPanel.SendCommand += OnExecuteCommand;
     }
 
-    void OnDisable()
-    {
+    void OnDisable ( ) {
         CommandPanel.SendCommand -= OnExecuteCommand;
     }
 
-    void OnExecuteCommand(Command command)
-    {
-        if (command.commandIdx == commandIdx)
-        {
+    void OnExecuteCommand (Command command) {
+        if (command.commandIdx == commandIdx) {
             backgroundImage.color = Color.green;
         }
     }

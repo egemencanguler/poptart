@@ -23,6 +23,10 @@ public class CommandPanel : MonoBehaviour {
     }
 
     public void Setup (int nPlayer, int nCommand, int nLeft, int nRight, int nUp, int nDown) {
+        foreach (Transform child in buttonContainer) {
+            Destroy (child.gameObject);
+        }
+
         numberOfPlayers = nPlayer;
         numberOfCommands = nCommand;
 
@@ -129,5 +133,7 @@ public class CommandPanel : MonoBehaviour {
             yield return wait;
         }
 
+        playButton.interactable = true;
+        playButton.image.color = Color.green;
     }
 }

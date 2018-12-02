@@ -57,6 +57,10 @@ MonoBehaviour:
   args: []
   HasMoved: 0
   prefabList: {fileID: 0}
+  dogColor:
+  - {r: 0.8602941, g: 1, b: 0.8901623, a: 1}
+  - {r: 0.86764705, g: 0.8795132, b: 1, a: 1}
+  renderer: {fileID: 212244009598386360}
 --- !u!212 &212244009598386360
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -17,20 +17,28 @@ public class BoardLoader : MonoBehaviour {
         GenerateBoard (boardText.text);
     }
 
-    public void GenerateBoard (string text) {
+    public void GenerateBoard (string text, bool setupPanel = true) {
+        PlayerCharacter.userCount = 0;
+
+        Board.Instance.Clear ( );
+
         string[ ] lines = text.Split ('\n');
         BoardWidth = lines.Length;
 
-        string[ ] mapConf = lines[0].Split (' ');
+        if (setupPanel) {
 
-        int dogCount = int.Parse (mapConf[0]);
-        int maxTurn = int.Parse (mapConf[1]);
-        int up = int.Parse (mapConf[2]);
-        int right = int.Parse (mapConf[3]);
-        int down = int.Parse (mapConf[4]);
-        int left = int.Parse (mapConf[5]);
+            string[ ] mapConf = lines[0].Split (' ');
 
-        panel.Setup (dogCount, maxTurn, left, right, up, down);
+            int dogCount = int.Parse (mapConf[0]);
+            int maxTurn = int.Parse (mapConf[1]);
+            int up = int.Parse (mapConf[2]);
+            int right = int.Parse (mapConf[3]);
+            int down = int.Parse (mapConf[4]);
+            int left = int.Parse (mapConf[5]);
+
+            panel.Setup (dogCount, maxTurn, left, right, up, down);
+
+        }
 
         for (int l = 1; l < lines.Length; l++) {
             string[ ] tokens = lines[l].Split (' ');
