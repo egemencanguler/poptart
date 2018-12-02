@@ -126,11 +126,14 @@ public class CommandPanel : MonoBehaviour {
         while (commands.Count != 0) {
             Command command = commands.Dequeue ( );
             Debug.Log ("Command: " + command.ToString ( ));
-            if (SendCommand != null) {
+            Interpolator.BeforeCommand();
+            if (SendCommand != null) 
+            {
                 SendCommand (command);
                 Board.Instance.Turn ( );
             }
-            yield return wait;
+            Interpolator.AfterCommand();
+            yield return Interpolator.Interpolate(0.5f);
         }
 
         playButton.interactable = true;
