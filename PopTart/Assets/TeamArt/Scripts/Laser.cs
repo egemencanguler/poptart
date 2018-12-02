@@ -15,12 +15,15 @@ public class Laser : Unit {
 
     private ArrayList parts = new ArrayList ( );
 
+    private int process = 0;
+
     void Awake ( ) {
         laserLineRenderer.positionCount = 2;
     }
 
     public void SetEnd (Vector2 end) {
         foreach (LaserPart part in parts) {
+            part.tile.Unit = null;
             Destroy (part.gameObject);
         }
 
@@ -42,17 +45,18 @@ public class Laser : Unit {
         laserLineRenderer.SetPosition (1, end);
     }
 
-    bool open = false;
-
     public override void Turn ( ) {
-        Debug.Log (args.Length);
-        if (int.Parse (args[3]) == 1) {
-            Debug.Log (open);
-            if (open) {
-                open = false;
+        if (int.Parse (args[3]) != 0) {
+
+            ++process;
+
+            if (process % int.Parse (args[3]) == int.Parse (args[4])) {
                 SetEnd (Board.Instance.boardToWorld (tile.position));
+
+                if ((process / int.Parse (args[3])) % 2 != 0)
+                    process = process + int.Parse (args[3]) - 1;
+
             } else {
-                open = true;
                 Init (args);
             }
         }
@@ -61,9 +65,15 @@ public class Laser : Unit {
     public override void Init (string[ ] args) {
         int dir = int.Parse (args[1]);
         int length = int.Parse (args[2]);
-        int toggle = int.Parse (args[3]);
 
         direction = (Direction) dir;
+
+        if (int.Parse (args[3]) != 0) {
+            if (process % int.Parse (args[3]) == int.Parse (args[4])) {
+                SetEnd (Board.Instance.boardToWorld (tile.position));
+                return;
+            }
+        }
 
         GridTile temp;
         LaserPart laserPart;
@@ -79,6 +89,9 @@ public class Laser : Unit {
 
                 temp = Board.Instance.GetTile (pos);
                 if (temp != null) {
+
+                    if (temp.Unit != null && temp.Unit is PlayerCharacter)
+                        ((PlayerCharacter) temp.Unit).Die ( );
 
                     temp.Unit = laserPart;
                     laserPart.tile = temp;
@@ -102,6 +115,9 @@ public class Laser : Unit {
                 temp = Board.Instance.GetTile (pos);
                 if (temp != null) {
 
+                    if (temp.Unit != null && temp.Unit is PlayerCharacter)
+                        ((PlayerCharacter) temp.Unit).Die ( );
+
                     temp.Unit = laserPart;
                     laserPart.tile = temp;
                     laserPart.laser = this;
@@ -123,9 +139,10 @@ public class Laser : Unit {
 
                 temp = Board.Instance.GetTile (pos);
 
-                Debug.Log (pos);
-
                 if (temp != null) {
+
+                    if (temp.Unit != null && temp.Unit is PlayerCharacter)
+                        ((PlayerCharacter) temp.Unit).Die ( );
 
                     temp.Unit = laserPart;
                     laserPart.tile = temp;
@@ -149,6 +166,9 @@ public class Laser : Unit {
 
                 temp = Board.Instance.GetTile (pos);
                 if (temp != null) {
+
+                    if (temp.Unit != null && temp.Unit is PlayerCharacter)
+                        ((PlayerCharacter) temp.Unit).Die ( );
 
                     temp = Board.Instance.GetTile (pos);
                     temp.Unit = laserPart;

@@ -23,6 +23,9 @@ public class InputHandler : MonoBehaviour {
 		} else if (Input.GetKeyDown (KeyCode.Alpha4)) {
 			loader.GenerateBoard (levels[3].text);
 			currentMap = 3;
+		} else if (Input.GetKeyDown (KeyCode.Alpha5)) {
+			loader.GenerateBoard (levels[4].text);
+			currentMap = 4;
 		} else if (Input.GetKeyDown (KeyCode.R)) {
 			loader.GenerateBoard (levels[currentMap].text, false);
 		}

@@ -27,6 +27,10 @@ public class Board : MonoBehaviour {
 		}
 	}
 
+	public AudioSource source;
+	public AudioClip dieSound;
+	public AudioClip rescueSound;
+
 	public float cellsize = 3.2f;
 
 	void Awake ( ) {
@@ -53,7 +57,14 @@ public class Board : MonoBehaviour {
 		}
 
 		for (int i = 0; i < tiles.Count; ++i) {
-			((GridTile) tiles[i]).Turn ( );
+			if (((GridTile) tiles[i]).Unit is Laser) {
+				((GridTile) tiles[i]).Turn ( );
+			}
+		}
+		for (int i = 0; i < tiles.Count; ++i) {
+			if (((GridTile) tiles[i]).Unit is Laser == false) {
+				((GridTile) tiles[i]).Turn ( );
+			}
 		}
 	}
 

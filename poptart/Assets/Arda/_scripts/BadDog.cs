@@ -41,7 +41,6 @@ public class BadDog : Unit {
 	}
 
 	public void Move ( ) {
-		Debug.Log ("id: bad dog" + "\t" + "dir:" + direction);
 
 		GridTile nextTile = Board.Instance.GetNeighbour (tile, direction);
 

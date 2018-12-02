@@ -42,8 +42,6 @@ public class PlayerCharacter : Unit {
 	}
 
 	public void Move ( ) {
-		Debug.Log ("id:" + id + "\t" + "dir:" + direction);
-
 		GridTile nextTile = Board.Instance.GetNeighbour (tile, direction);
 
 		if (nextTile == null)
@@ -65,7 +63,7 @@ public class PlayerCharacter : Unit {
 					unit.Turn ( );
 					Move ( );
 				} else if (unit is Finish) {
-					Die ( );
+					Die (true);
 				}
 
 				return;
@@ -81,7 +79,15 @@ public class PlayerCharacter : Unit {
 		direction = Direction.none;
 	}
 
-	public void Die ( ) {
+	public void Die (bool rescue = false) {
+		if (rescue) {
+			Board.Instance.source.clip = Board.Instance.rescueSound;
+			Board.Instance.source.Play ( );
+		} else {
+			Board.Instance.source.clip = Board.Instance.dieSound;
+			Board.Instance.source.Play ( );
+		}
+
 		tile.Unit = null;
 
 		//unsubscribe to events
