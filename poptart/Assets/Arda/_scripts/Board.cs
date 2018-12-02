@@ -15,7 +15,7 @@ public class Board : MonoBehaviour {
 	[SerializeField]
 	private GameObject tilePrefab;
 
-	private Dictionary<Vector2, GridTile> grid;
+	public Dictionary<Vector2, GridTile> grid;
 
 	static private Board instance;
 
