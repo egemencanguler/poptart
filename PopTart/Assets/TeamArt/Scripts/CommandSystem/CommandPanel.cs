@@ -18,6 +18,9 @@ public class CommandPanel : MonoBehaviour {
     int numberOfPlayers;
     int numberOfCommands;
 
+    public AudioClip pause, play;
+    public AudioSource audioSource;
+
     void Awake ( ) {
         playButton.onClick.AddListener (OnPlayButtonClicked);
     }
@@ -108,6 +111,9 @@ public class CommandPanel : MonoBehaviour {
         playButton.interactable = false;
         playButton.image.color = Color.red;
 
+        audioSource.clip = play;
+        audioSource.Play ( );
+
         const float Interval = 0.5f;
         var wait = new WaitForSeconds (Interval);
         Queue<Command> commands = new Queue<Command> ( );
@@ -126,17 +132,19 @@ public class CommandPanel : MonoBehaviour {
         while (commands.Count != 0) {
             Command command = commands.Dequeue ( );
             Debug.Log ("Command: " + command.ToString ( ));
-            Interpolator.BeforeCommand();
-            if (SendCommand != null) 
-            {
+            Interpolator.BeforeCommand ( );
+            if (SendCommand != null) {
                 SendCommand (command);
                 Board.Instance.Turn ( );
             }
-            Interpolator.AfterCommand();
-            yield return Interpolator.Interpolate(0.5f);
+            Interpolator.AfterCommand ( );
+            yield return Interpolator.Interpolate (0.5f);
         }
 
         playButton.interactable = true;
         playButton.image.color = Color.green;
+
+        audioSource.clip = pause;
+        audioSource.Play ( );
     }
 }

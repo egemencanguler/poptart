@@ -40,11 +40,26 @@ public class Laser : Unit {
         laserLineRenderer.SetPosition (1, end);
     }
 
-    public override void Turn ( ) { }
+    bool open = false;
+
+    public override void Turn ( ) {
+        Debug.Log (args.Length);
+        if (int.Parse (args[3]) == 1) {
+            Debug.Log (open);
+            if (open) {
+                open = false;
+                SetEnd (Board.Instance.boardToWorld (tile.position));
+            } else {
+                open = true;
+                Init (args);
+            }
+        }
+    }
 
     public override void Init (string[ ] args) {
         int dir = int.Parse (args[1]);
         int length = int.Parse (args[2]);
+        int toggle = int.Parse (args[3]);
 
         direction = (Direction) dir;
 
