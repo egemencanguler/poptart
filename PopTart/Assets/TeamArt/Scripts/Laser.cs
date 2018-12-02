@@ -24,6 +24,8 @@ public class Laser : Unit {
             Destroy (part.gameObject);
         }
 
+        parts.Clear ( );
+
         float length = Vector2.Distance (end, transform.position);
         float barrelDistance = Vector3.Distance (barrelEndTransform.position, transform.position);
 
